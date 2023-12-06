@@ -1,0 +1,32 @@
+CREATE TABLE sporting_goods (id INTEGER PRIMARY KEY, item TEXT, quantity INTEGER , price INTEGER, sport TEXT);
+
+INSERT INTO sporting_goods VALUES (1, "Basketball", 30, 15.00, "NBA");
+INSERT INTO sporting_goods VALUES (2, "Football", 25, 12.00, "NFL");
+INSERT INTO sporting_goods VALUES (3, "Baseball", 20, 10.00, "MLB");
+INSERT INTO sporting_goods VALUES (4, "Puck", 20, 10.00, "NHL");
+INSERT INTO sporting_goods VALUES (5, "Soccer Ball", 15, 15.00, "MLS");
+INSERT INTO sporting_goods VALUES (6, "Hockey Stick", 50, 30.00, "NHL");
+INSERT INTO sporting_goods VALUES (7, "Snowboard", 70, 90.00, "Olympic");
+INSERT INTO sporting_goods VALUES (8, "Golf Club", 40, 40.00, "PGA");
+INSERT INTO sporting_goods VALUES (9, "Tennis Racquets", 45, 35.00, "Tennis");
+INSERT INTO sporting_goods VALUES (10, "Volleyball", 78, 20.00, "Volleyball");
+INSERT INTO sporting_goods VALUES (11, "Golf Ball", 120, 17.00, "PGA");
+INSERT INTO sporting_goods VALUES (12, "Guardian Cap", 65, 130.00, "NFL");
+INSERT INTO sporting_goods VALUES (13, "Shooting Sleeve", 85, 13.00, "NBA");
+INSERT INTO sporting_goods VALUES (14, "Cleats", 77, 62.00, "NFL");
+INSERT INTO sporting_goods VALUES (15, "Bat", 53, 47.00, "MLB");
+
+# Show all information by ordering it by price.
+SELECT *
+FROM sporting_goods
+ORDER BY price;
+
+#Find all the items that are appropriate for the NFL.
+SELECT item
+FROM sporting_goods
+WHERE sport = "NFL";
+
+#What's the total price of all sporting good products?
+SELECT SUM(price) as total_price
+FROM sporting_goods
+
