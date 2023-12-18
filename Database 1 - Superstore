@@ -1,4 +1,4 @@
--Create a superstore database
+-Utilized the following Superstore data and 
 
 CREATE TABLE superstore (
     item_id INTEGER PRIMARY KEY,
@@ -60,3 +60,8 @@ FROM superstore
 WHERE category = 'Kitchen Supplies'
 GROUP BY item_name
 ORDER BY stock_quantity;
+
+# Find the total stock quantity of the air purifier
+SELECT item_name, MAX(stock_quantity)
+FROM superstore
+WHERE item_name = 'Air Purifier'
