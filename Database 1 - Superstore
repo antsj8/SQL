@@ -53,3 +53,10 @@ WHERE category = 'Kitchen Supplies';
 SELECT stock_quantity, item_name
 FROM superstore
 WHERE item_name = 'Premium Coffee Maker';
+
+#Find all the items that are Kitchen Supplies and order by the stock quantity from lowest to highest
+SELECT *
+FROM superstore
+WHERE category = 'Kitchen Supplies'
+GROUP BY item_name
+ORDER BY stock_quantity;
