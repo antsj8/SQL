@@ -6,13 +6,15 @@ FROM us_project.us_household_income;
 SELECT *
 FROM us_project.us_household_income_statistics;
 
-
+------------------------------------------------------------------------------------------------------------------------------
 
 SELECT COUNT(id)
 FROM us_project.us_household_income;
 
 SELECT COUNT(id)
 FROM us_project.us_household_income_statistics;
+
+------------------------------------------------------------------------------------------------------------------------------
 
 #Identify id duplicates and delete them
 
@@ -43,8 +45,10 @@ WHERE row_id IN (
       ) duplicates
   WHERE row_num > 1)
 ;
+------------------------------------------------------------------------------------------------------------------------------
 
-#Find the state names that are mispelled and update to match certain states
+
+#Updated any mispelled values for the States
 SELECT DISTINCT State_Name
 FROM us_project.us_household_income
 ORDER BY 1
@@ -58,8 +62,8 @@ UPDATE FROM us_project.us_household_income
 SET State_Name = 'Alabama'
 WHERE State_Name = 'alabama';
 
-
-#Find any missing values in the County and Type column
+------------------------------------------------------------------------------------------------------------------------------
+#Find the missing place value and update it to Autaugaville
 SELECT *
 FROM us_project.us_household_income
 WHERE County = 'Autauga County'
@@ -72,7 +76,9 @@ SET Place = 'Autaugaville'
 WHERE County = 'Autauga County'
 AND City = 'Vinemont;
 
-#
+------------------------------------------------------------------------------------------------------------------------------
+
+#Modify any mispelled values from the Type column
 SELECT Type, COUNT(Type)
 FROM us_project.us_household_income
 GROUP BY Type
@@ -83,7 +89,3 @@ SET Type = 'Borough'
 WHERE Type = 'Boroughs'
 
 
-SELECT ALand, AWater
-FROM us_project.us_household_income
-WHERE (ALand = 0 OR ALand = '' OR ALand IS NULL)
-;
