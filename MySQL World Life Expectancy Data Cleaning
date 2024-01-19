@@ -1,0 +1,36 @@
+#World Life Expectancy Data Cleaning
+
+
+SELECT *
+FROM world_life_expectancy
+;
+
+SELECT Country, Year, CONCAT(Country, Year), COUNT(CONCAT(Country, Year))
+FROM world_life_expectancy
+GROUP BY  Country, Year, CONCAT(Country, Year)
+HAVING COUNT(CONCAT(Country, Year)) > 1
+;
+
+
+SELECT *
+FROM (
+    SELECT Row_ID,
+    CONCAT(Country, Year),
+    ROW_NUMBER() OVER(PARTITION BY CONCAT(Country, Year) ORDER BY CONCAT(Country, Year)) as Row_Num
+    FROM FROM world_life_expectancy
+    ) AS Row_table
+WHERE Row_Num > 1
+;
+
+DELETE FROM world_life_expectancy
+WHERE 
+    Row_id IN (
+    SELECT Row_ID
+FROM (
+    SELECT Row_ID,
+    CONCAT(Country, Year),
+    ROW_NUMBER() OVER(PARTITION BY CONCAT(Country, Year) ORDER BY CONCAT(Country, Year)) as Row_Num
+    FROM FROM world_life_expectancy
+    ) AS Row_table
+WHERE Row_Num > 1
+;
