@@ -56,11 +56,13 @@ ORDER BY 1
 
 UPDATE FROM us_project.us_household_income
 SET State_Name = 'Georgia'
-WHERE State_Name = 'georia';.
+WHERE State_Name = 'georia'
+;
 
 UPDATE FROM us_project.us_household_income
 SET State_Name = 'Alabama'
-WHERE State_Name = 'alabama';
+WHERE State_Name = 'alabama'
+;
 
 ------------------------------------------------------------------------------------------------------------------------------
 #Find the missing place value and update it to Autaugaville
@@ -74,7 +76,8 @@ ORDER BY 1
 UPDATE FROM us_household_income
 SET Place = 'Autaugaville'
 WHERE County = 'Autauga County'
-AND City = 'Vinemont;
+AND City = 'Vinemont'
+;
 
 ------------------------------------------------------------------------------------------------------------------------------
 
@@ -87,5 +90,6 @@ GROUP BY Type
 UPDATE us_household_income
 SET Type = 'Borough'
 WHERE Type = 'Boroughs'
+;
 
 
