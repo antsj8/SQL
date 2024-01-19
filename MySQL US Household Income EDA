@@ -7,39 +7,46 @@ FROM us_project.us_household_income;
 SELECT *
 FROM us_project.us_household_income_statistics;
 
-#Identify the top 10 largest states by land
+------------------------------------------------------------------------------------------------------------------------------
+#Identify the top 10 largest states by land.
 SELECT State_Name, SUM(ALand), SUM(AWater)
 FROM us_project.us_household_income
 GROUP BY State_Name
 ORDER BY 2 DESC
-LIMIT 10;
-
-#Identify the top 10 largest states by water
+LIMIT 10
+;
+------------------------------------------------------------------------------------------------------------------------------
+#Identify the top 10 largest states by water.
 SELECT State_Name, SUM(ALand), SUM(AWater)
 FROM us_project.us_household_income
 GROUP BY State_Name
 ORDER BY 3 DESC
-LIMIT 10;
-
-#
+LIMIT 10
+;
+------------------------------------------------------------------------------------------------------------------------------
+# Inner Joined both tables and found some dirty data with a mean of 0.
 SELECT *
 FROM us_project.us_household_income u
 JOIN us_project.us_household_income_statistics us
-ON u.id = us.id;
+ON u.id = us.id
+;
 
 SELECT *
 FROM us_project.us_household_income u
 INNER JOIN us_project.us_household_income_statistics us
 ON u.id = us.id
-WHERE Mean <> 0;
+WHERE Mean <> 0
+;
 
 
 SELECT u.State_Name, County, Type, 'Primary', Mean, Median
 FROM us_project.us_household_income u
 INNER JOIN us_project.us_household_income_statistics us
 ON u.id = us.id
-WHERE Mean <> 0;
-
+WHERE Mean <> 0
+;
+------------------------------------------------------------------------------------------------------------------------------
+#Analyze which 10 states has the highest averages and the lowest averages of the Mean and Median.
 SELECT u.State_Name,  ROUND(AVG(Mean),1), ROUND(AVG(Median),1)
 FROM us_project.us_household_income u
 INNER JOIN us_project.us_household_income_statistics us
@@ -49,9 +56,8 @@ GROUP BY  u.State_Name
 ORDER BY 3 DESC
 LIMIT 10
 ;
-
-
-
+------------------------------------------------------------------------------------------------------------------------------
+#Find different types of areas, city, tracks.
 SELECT Type, COUNT(Type), ROUND(AVG(Mean),1), ROUND(AVG(Median),1)
 FROM us_project.us_household_income u
 INNER JOIN us_project.us_household_income_statistics us
@@ -62,15 +68,18 @@ HAVING COUNT(Type) > 100
 ORDER BY 4 DESC
 LIMIT 20
 ;
-
+------------------------------------------------------------------------------------------------------------------------------
+#Find the community types.
 SELECT *
 FROM us_household_income
-WHERE Type = 'Community';
-
-
+WHERE Type = 'Community'
+;
+------------------------------------------------------------------------------------------------------------------------------
+#Found cities that made a huge amount of money.
 SELECT u.State_Name, City, ROUND(AVG(Mean),1), ROUND(AVG(Median),1)
 FROM us_project.us_household_income u
 JOIN us_project.us_household_income_statistics us
 ON u.id = us.id
 GROUP BY u.State_Name, City
-ORDER BY 3 DESC;
+ORDER BY 3 DESC
+;
